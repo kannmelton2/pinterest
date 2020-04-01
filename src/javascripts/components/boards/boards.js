@@ -13,11 +13,10 @@ const getMyUid = () => {
 
 const buildBoards = () => {
   const authUser = getMyUid();
-  console.error('current user', authUser);
   boardData.getBoardsbyUid(authUser)
     .then((boards) => {
-      let domString = '<h1>BOARDS</h1>';
-      domString += '<div class="d-flex flex-wrap">';
+      let domString = '<h1 class="text-center">BOARDS</h1>';
+      domString += '<div class="m-auto d-flex flex-wrap">';
       boards.forEach((board) => {
         domString += boardComponent.boardMaker(board);
       });
