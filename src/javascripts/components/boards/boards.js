@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 
 import boardData from '../../helpers/data/boardData';
+import utils from '../../helpers/utils';
 
 // import utils from '../../helpers/utils';
 
@@ -15,7 +16,11 @@ const buildBoards = () => {
   console.error('current user', authUser);
   boardData.getBoardsbyUid(authUser)
     .then((boards) => {
-      console.error('users boards', boards);
+      let domString = '';
+      boards.forEach((board) => {
+        domString += `${board.name}`;
+      });
+      utils.printToDom('boards', domString);
     })
     .catch((err) => console.error('get boards broke', err));
 };
