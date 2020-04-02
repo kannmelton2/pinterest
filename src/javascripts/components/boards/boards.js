@@ -1,8 +1,8 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
-import boardComponent from '../boardComponent/boardComponent';
 import singleBoard from '../singleBoard/singleBoard';
+import boardComponent from '../boardComponent/boardComponent';
 
 import boardData from '../../helpers/data/boardData';
 import utils from '../../helpers/utils';
@@ -27,5 +27,6 @@ const buildBoards = () => {
     })
     .catch((err) => console.error('get boards broke', err));
 };
+
 
 export default { buildBoards };
