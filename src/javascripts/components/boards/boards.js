@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 
 import boardComponent from '../boardComponent/boardComponent';
+import singleBoard from '../singleBoard/singleBoard';
 
 import boardData from '../../helpers/data/boardData';
 import utils from '../../helpers/utils';
@@ -22,6 +23,7 @@ const buildBoards = () => {
       });
       domString += '</div>';
       utils.printToDom('boards', domString);
+      $('body').on('click', '.card', singleBoard.singleBoardView);
     })
     .catch((err) => console.error('get boards broke', err));
 };

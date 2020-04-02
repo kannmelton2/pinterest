@@ -1,25 +1,31 @@
 {
   "pin1": {
+    "name": "DIY Project",
     "imageUrl": "https://images.unsplash.com/photo-1557674538-bd2a3adf4bcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=932&q=80",
     "boardId": "board1"
   },
   "pin2": {
+    "name": "DIY Project 2",
     "imageUrl": "https://images.unsplash.com/photo-1575211560755-c8036a798cd4?ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80",
     "boardId": "board1"
   },
   "pin3": {
+    "name": "Cool Makeup",
     "imageUrl": "https://images.unsplash.com/photo-1572259875530-a02fc114b447?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80",
     "boardId": "board2"
   },
   "pin4": {
+    "name": "DIY Project",
     "imageUrl": "https://images.unsplash.com/photo-1557674538-bd2a3adf4bcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=932&q=80",
     "boardId": "board3"
   },
   "pin5": {
+    "name": "DIY Project 2",
     "imageUrl": "https://images.unsplash.com/photo-1575211560755-c8036a798cd4?ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80",
     "boardId": "board3"
   },
   "pin6": {
+    "name": "Cool Cosplay",
     "imageUrl": "https://images.unsplash.com/photo-1572259875530-a02fc114b447?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80",
     "boardId": "board4"
   }
