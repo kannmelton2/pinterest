@@ -4,6 +4,10 @@ const boardMaker = (board) => {
       <h5 class="card-header text-center">${board.name}</h5>
     <div class="card-body">
      <p class="card-text">${board.description}</p>
+     <div>
+     <button class="btn btn-primary view-board-btn">See Board</button>
+     <button class="btn btn-danger delete-board-btn"><i class="fas fa-trash-alt"></i></button>
+     </div>
     </div>
     </div>
 </div>`;
