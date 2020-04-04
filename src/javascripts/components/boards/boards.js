@@ -5,10 +5,12 @@ import singleBoard from '../singleBoard/singleBoard';
 import boardComponent from '../boardComponent/boardComponent';
 
 import boardData from '../../helpers/data/boardData';
+import pinData from '../../helpers/data/pinData';
 import utils from '../../helpers/utils';
 
 const removeBoard = (e) => {
   const boardId = e.target.closest('.card').id;
+  pinData.removePinsWithBoard(boardId);
   boardData.deleteBoard(boardId)
   // eslint-disable-next-line no-use-before-define
     .then(() => buildBoards())
