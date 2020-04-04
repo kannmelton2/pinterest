@@ -23,7 +23,7 @@ const buildBoards = () => {
       });
       domString += '</div>';
       utils.printToDom('boards', domString);
-      $('body').on('click', '.card', singleBoard.singleBoardView);
+      $('body').on('click', '.board-card', singleBoard.singleBoardView);
     })
     .catch((err) => console.error('get boards broke', err));
 };
