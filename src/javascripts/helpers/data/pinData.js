@@ -22,4 +22,16 @@ const getPins = () => new Promise((resolve, reject) => {
 
 const deletePin = (pinId) => axios.delete(`${baseUrl}/pins/${pinId}.json`);
 
-export default { getPins, deletePin };
+const removePinsWithBoard = (boardId) => {
+  getPins()
+    .then((pins) => {
+      pins.forEach((pin) => {
+        if (pin.boardId === boardId) {
+          deletePin(pin.id);
+        }
+      });
+    })
+    .catch((err) => console.error('remove pins with boards failed', err));
+};
+
+export default { getPins, deletePin, removePinsWithBoard };
