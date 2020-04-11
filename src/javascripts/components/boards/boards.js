@@ -1,19 +1,12 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
-
 import singleBoard from '../singleBoard/singleBoard';
 import boardComponent from '../boardComponent/boardComponent';
 import newBoardForm from '../newBoardForm/newBoardForm';
+import newPinForm from '../newPinForm/newPinForm';
 
 import boardData from '../../helpers/data/boardData';
 import pinData from '../../helpers/data/pinData';
 import utils from '../../helpers/utils';
 
-// Get UID function
-const getMyUid = () => {
-  const myUid = firebase.auth().currentUser.uid;
-  return myUid;
-};
 
 // Remove Board Function
 const removeBoard = (e) => {
@@ -38,7 +31,7 @@ const makeNewBoard = (e) => {
   const addNewBoard = {
     name: $('#board-name').val(),
     description: $('#board-description').val(),
-    uid: getMyUid(),
+    uid: utils.getMyUid(),
   };
   boardData.addBoard(addNewBoard)
     .then(() => {
@@ -49,13 +42,38 @@ const makeNewBoard = (e) => {
     .catch((err) => console.error('could not make new board', err));
 };
 
+// Close New Pin Form
+const closeNewPinForm = () => {
+  utils.printToDom('add-pin-form', '');
+  // eslint-disable-next-line no-use-before-define
+  buildBoards();
+};
+
+// Make New Pin function
+const makeNewPin = (e) => {
+  e.preventDefault();
+  const addNewPin = {
+    name: $('#pin-name').val(),
+    imageUrl: $('#pin-image').val(),
+    boardId: $('#board-id').val(),
+  };
+  pinData.addPin(addNewPin)
+    .then(() => {
+      utils.printToDom('add-pin-form', '');
+      // eslint-disable-next-line no-use-before-define
+      buildBoards();
+    })
+    .catch((err) => console.error('could not add pin', err));
+};
+
 // Build Boards function
 const buildBoards = () => {
-  const authUser = getMyUid();
+  const authUser = utils.getMyUid();
   boardData.getBoardsbyUid(authUser)
     .then((boards) => {
       let domString = '<h1 class="text-center">BOARDS</h1>';
-      domString += '<button class="btn btn-success" id="open-new-board-form"><i class="fas fa-plus"></i></button>';
+      domString += '<button class="btn btn-dark" id="open-new-board-form"><i class="fas fa-plus"></i><span class="ml-1">New Board</span></button>';
+      domString += '<button class="btn btn-secondary" id="open-new-pin-form"><i class="fas fa-plus"></i><span class="ml-1">New Pin</span></button>';
       domString += '<div class="m-auto d-flex flex-wrap">';
       boards.forEach((board) => {
         domString += boardComponent.boardMaker(board);
@@ -71,6 +89,9 @@ const boardEvents = () => {
   $('body').on('click', '.delete-board-btn', removeBoard);
   $('body').on('click', '.view-board-btn', singleBoard.singleBoardView);
   $('body').on('click', '#open-new-board-form', newBoardForm.buildNewBoardForm);
+  $('body').on('click', '#open-new-pin-form', newPinForm.buildNewPinForm);
+  $('body').on('click', '#cancel-new-pin', closeNewPinForm);
+  $('body').on('click', '#add-new-pin', makeNewPin);
   $('body').on('click', '#cancel-new-board', closeNewBoardForm);
   $('body').on('click', '#add-new-board', makeNewBoard);
 };
