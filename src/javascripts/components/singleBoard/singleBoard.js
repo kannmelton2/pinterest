@@ -1,17 +1,21 @@
+import editPinForm from '../editPinForm/editPinForm';
 import pinData from '../../helpers/data/pinData';
 import utils from '../../helpers/utils';
 
+// hide boards div from view to see single board view
 const hideBoardsDiv = () => {
   const boardsDiv = $('#boards');
   boardsDiv.addClass('hide');
 };
 
+// close single view and un-hide boards div
 const closeSingleViewEvent = () => {
   utils.printToDom('single-view', '');
   const boardsDiv = $('#boards');
   boardsDiv.removeClass('hide');
 };
 
+// remove a pin from the page and show the boards div
 const removePin = (e) => {
   const pinId = e.target.closest('.card').id;
   pinData.deletePin(pinId)
@@ -19,6 +23,14 @@ const removePin = (e) => {
     .catch((err) => console.error('delete pins failed', err));
 };
 
+// cancel editing a pin
+const cancelEditPin = () => {
+  utils.printToDom('edit-pin', '');
+  const singleViewDiv = $('#single-view');
+  singleViewDiv.removeClass('hide');
+};
+
+// build single board view
 const singleBoardView = (e) => {
   const boardId = e.target.closest('.card').id;
   pinData.getPins()
@@ -32,6 +44,7 @@ const singleBoardView = (e) => {
           <div class="card-body d-flex">
             <h5 class="card-title">${pin.name}</h5>
             <button class="btn btn-outline-danger ml-auto delete-pin-btn"><i class="fas fa-trash-alt"></i></button>
+            <button class="btn btn-outline-warning edit-pin-btn"><i class="fas fa-edit"></i></button>
           </div>
         </div>
         </div>`;
@@ -39,10 +52,16 @@ const singleBoardView = (e) => {
       });
       hideBoardsDiv();
       utils.printToDom('single-view', domString);
-      $('#close-single-view').click(closeSingleViewEvent);
-      $('body').on('click', '.delete-pin-btn', removePin);
     })
     .catch((err) => console.error('problem with get pins', err));
 };
 
-export default { singleBoardView };
+// events for the single board view
+const singleViewEvents = () => {
+  $('body').on('click', '#close-single-view', closeSingleViewEvent);
+  $('body').on('click', '.delete-pin-btn', removePin);
+  $('body').on('click', '.edit-pin-btn', editPinForm.editPinForm);
+  $('body').on('click', '#cancel-edit-pin', cancelEditPin);
+};
+
+export default { singleBoardView, singleViewEvents };

@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 
 import boards from '../../components/boards/boards';
+import singleBoard from '../../components/singleBoard/singleBoard';
 
 const authDiv = $('#auth');
 const boardsDiv = $('#boards');
@@ -20,6 +21,7 @@ const checkLoginStatus = () => {
       logoutButton.removeClass('hide');
       boards.buildBoards();
       boards.boardEvents();
+      singleBoard.singleViewEvents();
     } else {
       // person is not logged in
       authDiv.removeClass('hide');
