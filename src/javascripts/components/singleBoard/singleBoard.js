@@ -23,11 +23,11 @@ const removePin = (e) => {
     .catch((err) => console.error('delete pins failed', err));
 };
 
-// cancel editing a pin
-const cancelEditPin = () => {
-  utils.printToDom('edit-pin', '');
-  const singleViewDiv = $('#single-view');
-  singleViewDiv.removeClass('hide');
+// edit pin event - define pinId and boardId..?
+const editPinEvent = (e) => {
+  e.preventDefault();
+  const pinId = e.target.closest('.card').id;
+  editPinForm.editPinForm(pinId);
 };
 
 // build single board view
@@ -36,6 +36,7 @@ const singleBoardView = (e) => {
   pinData.getPins()
     .then((pins) => {
       let domString = '<div><button id="close-single-view" class="btn btn-outline-dark mt-3 ml-2"><i class="far fa-times-circle"></i></button></div>';
+      domString += `<div class="single-board-view" id="${boardId}">`;
       pins.forEach((pin) => {
         if (pin.boardId === boardId) {
           domString += `<div class="d-flex flex-wrap col-md-4 mt-3">
@@ -50,6 +51,7 @@ const singleBoardView = (e) => {
         </div>`;
         }
       });
+      domString += '</div>';
       hideBoardsDiv();
       utils.printToDom('single-view', domString);
     })
@@ -60,8 +62,7 @@ const singleBoardView = (e) => {
 const singleViewEvents = () => {
   $('body').on('click', '#close-single-view', closeSingleViewEvent);
   $('body').on('click', '.delete-pin-btn', removePin);
-  $('body').on('click', '.edit-pin-btn', editPinForm.editPinForm);
-  $('body').on('click', '#cancel-edit-pin', cancelEditPin);
+  $('body').on('click', '.edit-pin-btn', editPinEvent);
 };
 
 export default { singleBoardView, singleViewEvents };
