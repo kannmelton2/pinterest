@@ -1,13 +1,14 @@
 import boardData from '../../helpers/data/boardData';
 
 import utils from '../../helpers/utils';
+import './newPinForm.scss';
 
 const buildNewPinForm = () => {
   const authUser = utils.getMyUid();
   boardData.getBoardsbyUid(authUser)
     .then((boards) => {
       let domString = '';
-      domString += '<h2 class="text-center">Add New Pin</h2>';
+      domString += '<h2 class="mt-3 text-center">Add New Pin</h2>';
       domString += '<form class="container col-4">';
       domString += '<div class="form-group">';
       domString += '<label for="pin-name">Name:</label>';
@@ -26,7 +27,7 @@ const buildNewPinForm = () => {
       domString += '</select>';
       domString += '</div>';
       domString += '<button id="cancel-new-pin" class="btn btn-danger m-1">Cancel</button>';
-      domString += '<button type="submit" id="add-new-pin" class="btn btn-dark m-1">Add New Pin</button>';
+      domString += '<button type="submit" id="add-new-pin" class="btn text-light m-1">Add New Pin</button>';
       domString += '</form>';
       utils.printToDom('boards', '');
       utils.printToDom('add-pin-form', domString);
