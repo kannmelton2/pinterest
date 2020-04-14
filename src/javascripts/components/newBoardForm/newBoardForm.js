@@ -1,8 +1,9 @@
 import utils from '../../helpers/utils';
+import './newBoardForm.scss';
 
 const buildNewBoardForm = () => {
   let domString = '';
-  domString += '<h2 class="text-center">Add New Board</h2>';
+  domString += '<h2 class="mt-3 text-center">Add New Board</h2>';
   domString += '<form class="container col-4">';
   domString += '<div class="form-group">';
   domString += '<label for="board-name">Name:</label>';

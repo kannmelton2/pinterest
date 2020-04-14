@@ -7,6 +7,8 @@ import boardData from '../../helpers/data/boardData';
 import pinData from '../../helpers/data/pinData';
 import utils from '../../helpers/utils';
 
+import './boards.scss';
+
 // Remove Board Function
 const removeBoard = (e) => {
   const boardId = e.target.closest('.card').id;
@@ -86,9 +88,11 @@ const buildBoards = () => {
   const authUser = utils.getMyUid();
   boardData.getBoardsbyUid(authUser)
     .then((boards) => {
-      let domString = '<h1 class="text-center">BOARDS</h1>';
-      domString += '<button class="btn btn-dark" id="open-new-board-form"><i class="fas fa-plus"></i><span class="ml-1">New Board</span></button>';
-      domString += '<button class="btn btn-secondary" id="open-new-pin-form"><i class="fas fa-plus"></i><span class="ml-1">New Pin</span></button>';
+      let domString = '<h1 class=" mt-3 text-center">BOARDS</h1>';
+      domString += '<div class="container text-center">';
+      domString += '<button class="btn text-light m-2" id="open-new-board-form"><i class="fas fa-plus"></i><span class="ml-1">New Board</span></button>';
+      domString += '<button class="btn text-light m-2" id="open-new-pin-form"><i class="fas fa-plus"></i><span class="ml-1">New Pin</span></button>';
+      domString += '</div>';
       domString += '<div class="m-auto d-flex flex-wrap">';
       boards.forEach((board) => {
         domString += boardComponent.boardMaker(board);

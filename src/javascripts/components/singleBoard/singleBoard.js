@@ -35,8 +35,8 @@ const singleBoardView = (e) => {
   const boardId = e.target.closest('.card').id;
   pinData.getPins()
     .then((pins) => {
-      let domString = '<div><button id="close-single-view" class="btn btn-outline-dark mt-3 ml-2"><i class="far fa-times-circle"></i></button></div>';
-      domString += `<div class="single-board-view" id="${boardId}">`;
+      let domString = `<div class="mt-3 single-board-view d-flex" id="${boardId}">`;
+      domString += '<div><button id="close-single-view" class="btn btn-outline-dark mt-3 ml-2"><i class="far fa-times-circle"></i></button></div>';
       pins.forEach((pin) => {
         if (pin.boardId === boardId) {
           domString += `<div class="d-flex flex-wrap col-md-4 mt-3">
@@ -44,8 +44,8 @@ const singleBoardView = (e) => {
           <img src="${pin.imageUrl}" class="card-img-top" alt="...">
           <div class="card-body d-flex">
             <h5 class="card-title">${pin.name}</h5>
-            <button class="btn btn-outline-danger ml-auto delete-pin-btn"><i class="fas fa-trash-alt"></i></button>
-            <button class="btn btn-outline-warning edit-pin-btn"><i class="fas fa-edit"></i></button>
+            <button class="btn btn-outline-danger ml-auto m-1 delete-pin-btn"><i class="fas fa-trash-alt"></i></button>
+            <button class="btn btn-outline-warning m-1 edit-pin-btn"><i class="fas fa-edit"></i></button>
           </div>
         </div>
         </div>`;
