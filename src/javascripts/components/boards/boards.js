@@ -7,7 +7,6 @@ import boardData from '../../helpers/data/boardData';
 import pinData from '../../helpers/data/pinData';
 import utils from '../../helpers/utils';
 
-
 // Remove Board Function
 const removeBoard = (e) => {
   const boardId = e.target.closest('.card').id;
@@ -47,6 +46,22 @@ const closeNewPinForm = () => {
   utils.printToDom('add-pin-form', '');
   // eslint-disable-next-line no-use-before-define
   buildBoards();
+};
+
+// Submit edit pin form
+const submitEditPin = (e) => {
+  e.preventDefault();
+  const pinId = e.target.closest('.edit-pin-form-tag').id;
+  const editedPin = $('#edit-board-id').val();
+  pinData.updatePin(pinId, editedPin)
+    .then(() => {
+      const boardsDiv = $('#boards');
+      boardsDiv.removeClass('hide');
+      utils.printToDom('edit-pin', '');
+      // eslint-disable-next-line no-use-before-define
+      buildBoards();
+    })
+    .catch((err) => console.error('could not update pin', err));
 };
 
 // Make New Pin function
@@ -94,6 +109,7 @@ const boardEvents = () => {
   $('body').on('click', '#add-new-pin', makeNewPin);
   $('body').on('click', '#cancel-new-board', closeNewBoardForm);
   $('body').on('click', '#add-new-board', makeNewBoard);
+  $('body').on('click', '#submit-edit-pin', submitEditPin);
 };
 
 export default { buildBoards, boardEvents };
